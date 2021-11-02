@@ -14,3 +14,22 @@ know they have a strong bond.
 Join Maximiliano and his brother Luciano in:
 
     Bugz Broz 4: Apocalypse now with nuclear accidents and really big bugs...
+
+## How do I Hack on this Thing
+
+Bugz Broz 4 is written in [Fennel](https://fennel-lang.org) on top of the 
+[Love2D](https://love2d.org) game engine. A compatible distribution of Fennel 
+is already included in this repository, but you will need to download and
+install Love2D for your platform.
+
+### Running the game
+
+To run the game, navigate to the repo and run the following command:
+
+```
+love .
+```
+
+This will open the game window and start a fennel REPL in your console
+window.
+
