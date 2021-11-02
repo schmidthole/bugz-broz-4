@@ -33,3 +33,14 @@ love .
 This will open the game window and start a fennel REPL in your console
 window.
 
+### Hot Reloading
+
+Once you have the game running and a REPL open, you'll want to use the awesome
+`,reload` command to "hot reload" modules without restarting the game.
+
+For example, if you wanted to reload the main `game.fnl` module, you would
+simply call the following in your REPL:
+
+```
+,reload main
+```
