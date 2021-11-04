@@ -21,18 +21,23 @@
 (fn love.load [args]
   (when (~= :web (. args 1)) (repl.start)))
 
+(fn handle_keypress [key]
+  (if (= down_name key)
+    (set y_spot (+ y_spot speed))
+      (= up_name key)
+    (set y_spot (- y_spot speed))
+      (= right_name key)
+    (set x_spot (+ x_spot speed))
+      (= left_name key)
+    (set x_spot (- x_spot speed))
+  )
+)
+
+
 (fn love.update [dt]
   (each [key func (pairs keymap)]
     (if (love.keyboard.isDown key)
-      (if (= down_name key)
-        (set y_spot (+ y_spot speed))
-          (= up_name key)
-        (set y_spot (- y_spot speed))
-          (= right_name key)
-        (set x_spot (+ x_spot speed))
-          (= left_name key)
-        (set x_spot (- x_spot speed))
-      )
+      (handle_keypress key)
     )
   )
 )
