@@ -13,22 +13,18 @@
 (var x_spot 500)
 (var y_spot 375)
 (var speed 2.5)
-(local down_name "down")
-(local up_name "up")
-(local left_name "left")
-(local right_name "right")
 
 (fn love.load [args]
   (when (~= :web (. args 1)) (repl.start)))
 
 (fn handle_keypress [key]
-  (if (= down_name key)
+  (if (= "down" key)
     (set y_spot (+ y_spot speed))
-      (= up_name key)
+      (= "up" key)
     (set y_spot (- y_spot speed))
-      (= right_name key)
+      (= "right" key)
     (set x_spot (+ x_spot speed))
-      (= left_name key)
+      (= "left" key)
     (set x_spot (- x_spot speed))
   )
 )
