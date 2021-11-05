@@ -15,19 +15,24 @@
 (var speed 2.5)
 
 (fn love.load [args]
-  (when (~= :web (. args 1)) (repl.start)))
+  (when (~= :web (. args 1)) (repl.start))
+  (love.graphics.setDefaultFilter "nearest")
 
-(fn handle_keypress [key]
-  (if (= "down" key)
-    (set y_spot (+ y_spot speed))
-      (= "up" key)
-    (set y_spot (- y_spot speed))
-      (= "right" key)
-    (set x_spot (+ x_spot speed))
-      (= "left" key)
-    (set x_spot (- x_spot speed))
-  )
-)
+(fn love.keypressed [key]
+    (local x (. player x))
+    (local y (. player y))
+    (if (= key "left")
+      (if (is_tile_walkable (- x 1) y)
+        (tset player x (- x 1))))
+    (if (= key "right")
+      (if (is_tile_walkable (+ x 1) y)
+        (tset player x (+ x 1))))
+    (if (= key "up")
+      (if (is_tile_walkable x (- y 1))
+        (tset player y (- y 1))))
+    (if (= key "down")
+      (if (is_tile_walkable x (+ y 1))
+        (tset player y (+ y 1)))))
 
 
 (fn love.update [dt]
@@ -39,4 +44,4 @@
 )
 
 (fn love.draw []
-  (love.graphics.print "bug World" x_spot y_spot))
+  (love.graphics.print "Max" x_spot y_spot))
