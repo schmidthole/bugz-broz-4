@@ -23,11 +23,16 @@
     [4 4 4 4 4 4 15 15 15 15 5 5 13 13 13 13 5 5 5 5]
     [4 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5]])
 
-(fn drawmap []
+(fn drawm [t quads]
     (each [i row (ipairs tilemap)]
         (each [j tile (ipairs row)]
             (if (~= tile 0)
-                (love.graphics.push)
-                (love.graphics.scale 2 2)
-                (love.graphics.draw tileset (. grass_quads tile) (* j twidth) (* i theight))
-                (love.graphics.pop)))))
+
+                ;(love.graphics.push)
+                ;(love.graphics.scale 2 2)   
+                (love.graphics.draw t (. quads tile) (* j _G.twidth) (* i _G.theight))
+                ;(love.graphics.pop)
+
+                ))))
+
+(global drawmap drawm)
