@@ -1,6 +1,3 @@
-(local fennel (require :lib.fennel))
-(local repl (require :lib.stdio))
-
 (local tile (require "tile"))
 
 (global tilemap [
@@ -29,7 +26,7 @@
             (if (~= tile 0)
 
                 ;(love.graphics.push)
-                ;(love.graphics.scale 2 2)   
+                ;(love.graphics.scale 2 2)
                 (love.graphics.draw t (. quads tile) (* j _G.twidth) (* i _G.theight))
                 ;(love.graphics.pop)
 
