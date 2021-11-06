@@ -2,17 +2,25 @@
 (local repl (require :lib.stdio))
 
 (local player (require :player))
-(local map (require :map))
 (local tile (require :tile))
+(local map (require :map))
 
 ;; game configuration
 (local config {:player1-start-tile 2
-               :player1-asset "assets/player.png"})
+               :player1-asset "assets/player.png"
+               :grass-asset "assets/grass.png"
+               :grass-cols 4
+               :grass-rows 5})
 
 ;; player1 table
 (var player1 (player.init
               config.player1-start-tile
               config.player1-asset))
+
+;; grass map tiles
+(var grass-tileset (tile.load-tileset config.grass-asset
+                                      config.grass-cols
+                                      config.grass-rows))
 
 (fn love.load [args]
   ;; startup that juicy repl so we can jack in
@@ -37,7 +45,8 @@
 (fn love.draw []
   (love.graphics.push)
   (love.graphics.scale 2 2)
-  (_G.drawmap _G.tileset _G.grass_quads _G.twidth _G.theight)
-  (player.draw player1 _G.twidth _G.theight)
-  (love.graphics.pop)
-  )
+
+  (map.draw grass-tileset)
+  (player.draw player1 grass-tileset.width grass-tileset.height)
+
+  (love.graphics.pop))
