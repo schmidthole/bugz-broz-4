@@ -1,22 +1,33 @@
-(local fennel (require :lib.fennel))
-(local repl (require :lib.stdio))
+;;
+;; player.fnl
+;;
+;; representation of a player "object"
+;;
+(fn init [start-tile asset]
+  "init a player table with default values
 
-(local tile (require "tile"))
+  params:
+    - start-tile (number): x/y start coord
+    - asset (str): relative path to asset file
 
-(local start_tile 2)
-(fn init_player []
-    (let [p_obj {
-            "x"     start_tile
-            "y"     start_tile
-            "img"   (love.graphics.newImage "assets/player.png")
-        }] p_obj))
+  returns:
+    - player table
+"
+  {:x start-tile
+   :y start-tile
+   :img (love.graphics.newImage asset)})
 
-(fn drawp [p]
-    ;(love.graphics.push)
-    ;(love.graphics.scale 2 2)   
-    (love.graphics.draw (. p "img") (* (. p "x") _G.twidth) (* (. p "y") _G.theight))
-    ;(love.graphics.pop)
-)
+(fn draw [player tile-width tile-height]
+  "draw the player sprite at its coords
 
-(global drawplayer drawp)
-(global player (init_player))
+  params:
+    - player (table): player table
+    - tile-width (number): width of tiles
+    - tile-height (number): height of tiles
+"
+  (love.graphics.draw player.img
+                      (* player.x tile-width)
+                      (* player.y tile-height)))
+
+{:init init
+ :draw draw}
