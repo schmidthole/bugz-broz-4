@@ -6,15 +6,11 @@
 (local map (require :map))
 
 ;; game configuration
-(local config {:player1-start-tile 2
-               :player1-asset "assets/player.png"
-               :grass-asset "assets/grass.png"
-               :grass-cols 4
-               :grass-rows 5})
+(local config {:player1-start-coord {:x 2 :y 2}})
 
 ;; player1 table
 (var player1 (player.init
-              config.player1-start-tile
+              config.player1-start-coord
               config.player1-asset))
 
 ;; grass map tiles
