@@ -7,7 +7,8 @@
 
 ;; game configuration
 (local config {:player1-start-tile 2
-               :player1-asset "assets/player.png"
+               :player1-asset "assets/player/player_axe_swing.png"
+               :player1-movespeed 0.5
                :grass-asset "assets/grass.png"
                :grass-cols 4
                :grass-rows 5})
@@ -15,7 +16,8 @@
 ;; player1 table
 (var player1 (player.init
               config.player1-start-tile
-              config.player1-asset))
+              config.player1-asset
+              config.player1-movespeed))
 
 ;; grass map tiles
 (var grass-tileset (tile.load-tileset config.grass-asset
@@ -29,18 +31,40 @@
   (love.graphics.setDefaultFilter "nearest")
   (love.graphics.scale 2 2))
 
-(fn love.keypressed [key]
-  (if (= key "left")
-      (set player1.x (- player1.x 1)))
+;;(fn love.keypressed [key]
+;;  (if (= key "left")
+;;      (set player1.x (- player1.x 1)))
+;;
+;;  (if (= key "right")
+;;      (set player1.x (+ player1.x 1)))
+;;
+;;  (if (= key "up")
+;;      (set player1.y (- player1.y 1)))
+;;
+;;  (if (= key "down")
+;;      (set player1.y (+ player1.y 1))))
 
-  (if (= key "right")
-      (set player1.x (+ player1.x 1)))
+(fn love.update [dt]
 
-  (if (= key "up")
-      (set player1.y (- player1.y 1)))
+  (var movekey "")
+  (if (love.keyboard.isDown "up")
+    (set movekey "up"))
 
-  (if (= key "down")
-      (set player1.y (+ player1.y 1))))
+  (if (love.keyboard.isDown "down")
+    (set movekey "down"))
+
+  (if (love.keyboard.isDown "left")
+    (set movekey "left"))
+
+  (if (love.keyboard.isDown "right")
+    (set movekey "right"))
+
+  (var actionkey "")
+  (if (love.keyboard.isDown "space")
+    (set actionkey "space")
+    (set actionkey ""))
+
+  (player.update player1 movekey actionkey dt))
 
 (fn love.draw []
   (love.graphics.push)
